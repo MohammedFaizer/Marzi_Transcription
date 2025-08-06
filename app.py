@@ -21,13 +21,17 @@ uploaded_file = st.sidebar.file_uploader("Upload an MP3 file", type=["mp3"])
 if uploaded_file is not None:
     with st.spinner("Transcribing..."):
         audio_data = BytesIO(uploaded_file.read())
-        transcription = elevenlabs.speech_to_text.convert(
-        file=audio_data,
-        model_id="scribe_v1", # Model to use, for now only "scribe_v1" is supported
-        tag_audio_events=True, # Tag audio events like laughter, applause, etc.
-        language_code="eng", # Language of the audio file. If set to None, the model will detect the language automatically.
-        diarize=True, # Whether to annotate who is speaking
-        )
+        try:
+            transcription = elevenlabs.speech_to_text.convert(
+            file=audio_data,
+            model_id="scribe_v1", # Model to use, for now only "scribe_v1" is supported
+            tag_audio_events=True, # Tag audio events like laughter, applause, etc.
+            language_code="eng", # Language of the audio file. If set to None, the model will detect the language automatically.
+            diarize=True, # Whether to annotate who is speaking
+            )
+        except Exception as e:
+            st.error(f"Error during transcription: {e}")
+    
 
         st.text_area("Full Transcription", transcription.text, height=100)
         dialogues = []
