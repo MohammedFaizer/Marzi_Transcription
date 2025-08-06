@@ -13,7 +13,7 @@ elevenlabs = ElevenLabs(
 )
 
 
-st.title("Marzi Transcript & Diarization📝")
+st.title("Marzi Transcript & Diarizatin📝")
 
 
 uploaded_file = st.sidebar.file_uploader("Upload an MP3 file", type=["mp3"])
