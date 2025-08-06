@@ -9,11 +9,11 @@ import streamlit as st
 load_dotenv()
 
 elevenlabs = ElevenLabs(
-   api_key=st.secrets["elevenlabs"]["api_key"],
+   api_key="sk_96be91c0b7da53803d82b928207121620a9acf9d7695a937",
 )
 
 
-st.title("Marzi Transcript & Diarizatin📝")
+st.title("Marzi Transcript & Diarization📝")
 
 
 uploaded_file = st.sidebar.file_uploader("Upload an MP3 file", type=["mp3"])
