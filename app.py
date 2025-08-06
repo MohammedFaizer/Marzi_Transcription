@@ -9,7 +9,7 @@ import streamlit as st
 load_dotenv()
 
 elevenlabs = ElevenLabs(
-   api_key="sk_96be91c0b7da53803d82b928207121620a9acf9d7695a937",
+   api_key="sk_d5668a7fd4b5b4c0a12b1910fb8b0fcaeda9a979923df278",
 )
 
 
