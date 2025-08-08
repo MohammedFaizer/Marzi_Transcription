@@ -72,29 +72,26 @@ st.title("Marzi Transcript & Diarization📝")
 file = st.sidebar.file_uploader("Upload an MP3 file", type=["mp3"])
 
 if file is not None:
-    files = {"file": (file.name, file, "audio/mpeg")}
-    response = requests.post(
-        "https://staging-marzi-backend.cyces.co/api/chat/transcript/",
-        files=files,
-    )
-    data=response.json()["data"]
- 
-    st.text_area("Full Transcription", data["text"], height=200)
-    for msg in data["dialogues"]:
-        roles=""
-        
-        if msg["role"] == "User1":
-            roles="human"
-        
-        elif msg["role"] == "User2":
-            roles="ai"
+    try:
+        files = {"file": (file.name, file, "audio/mpeg")}
+        response = requests.post(
+            "https://staging-marzi-backend.cyces.co/api/chat/transcript/",
+            files=files,
+        )
+        data=response.json()["data"]
+    
+        st.text_area("Full Transcription", data["text"], height=200)
+        for msg in data["dialogues"]:
+            roles=""
             
-        with st.chat_message(roles):
-            st.write(msg["content"])
+            if msg["role"] == "User1":
+                roles="human"
+            
+            elif msg["role"] == "User2":
+                roles="ai"
+                
+            with st.chat_message(roles):
+                st.write(msg["content"])
+    except Exception as e:
+        st.error(f"Oopsie ! Error occured during transcription")
 
-    # st.json(response.json())
-    # for line in dialogues:
-    # if line["role"] == "user":
-    #     st.success(line["content"])
-    # elif line["role"] == "user2":
-    #     st.info(line["content"])
