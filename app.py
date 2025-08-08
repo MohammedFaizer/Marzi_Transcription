@@ -67,7 +67,7 @@
 import streamlit as st
 import requests
 
-st.title("Marzi Transcript & Diarization📝")
+st.title("Marzi Transcription & Diarization📝")
 
 file = st.sidebar.file_uploader("Upload an MP3 file", type=["mp3"])
 
